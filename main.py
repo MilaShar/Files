@@ -18,22 +18,19 @@ def clean_cache():
     else:
         shutil.rmtree(folder_cache)
         os.makedirs(folder_cache)
-    return
 clean_cache()
 
 #2
 def cache_zip(zip_file_path,cache_dir_path):
     with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
         zip_ref.extractall(cache_dir_path)
-    return
 
 cache_zip('data.zip','cache')
     
 def cached_files():
     list_new = []
     for file in os.listdir(os.path.abspath("cache")):
-        list_new.append(f"{os.path.abspath('cache')}\{file}")
-    print(list_new)
+        list_new.append(f"{os.path.abspath('cache')}/{file}")
     return list_new
 
 
@@ -42,8 +39,8 @@ def find_password(file_path):
         file = open(file_name, 'r')
         for line in file:
             if 'password' in line:
-                print(line[line.find(' ')+1:-1])
-                return line
+                #print(line[line.find(' ')+1:-1])
+                return line[line.find(' ')+1:-1]
             
 find_password(cached_files())
 
